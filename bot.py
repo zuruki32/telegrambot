@@ -2,7 +2,12 @@ import asyncio
 from aiogram import Bot, Dispatcher, types
 
 import os
-TOKEN = os.getenv("BOT_TOKEN")  # دریافت توکن از Railway
+TOKEN = os.getenv("BOT_TOKEN")
+
+if not TOKEN:
+    raise ValueError("❌ توکن یافت نشد! لطفا BOT_TOKEN را تنظیم کنید.")
+
+bot = Bot(token=TOKEN)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
