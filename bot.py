@@ -21,18 +21,17 @@ async def start_command(message: types.Message):
 # ✅ هندلر فوروارد پیام به ادمین‌ها
 @dp.message()
 async def forward_to_admins(message: types.Message):
-    # اگر کاربر از ادمین‌ها نبود
     if message.from_user.id not in ADMINS:
         for admin_id in ADMINS:
             try:
-                # فوروارد پیام به ادمین
                 await bot.forward_message(
                     chat_id=admin_id,
                     from_chat_id=message.chat.id,
                     message_id=message.message_id
                 )
+                print(f"✅ پیام با موفقیت به آیدی {admin_id} ارسال شد")  # لاگ موفقیت
             except Exception as e:
-                print(f"خطا در ارسال به آیدی {admin_id}: {e}")
+                print(f"🔥 خطا در ارسال به آیدی {admin_id}: {str(e)}")  # لاگ خطا
 
 async def main():
     await dp.start_polling(bot)
